@@ -1,0 +1,61 @@
+FXALL - FX 5 Test Case
+EBS  -  FX 6 Test Case
+DEUTSCHE   -  FX Spot 14
+
+SEND EMAILS FOR PORTALS
+EOD LOG COMPARISON
+
+JACK KELLY JIRA ASSIGNMENT - 
+REPO TRADE - email edel
+CWS REPORTS - waiting on evidence review
+REG REPORTING - got the reports from Kate
+
+UPDATE ON PROGRESS OF TEST PACKS
+
+
+To Do List 09/08/2020
+
+>Email to Test Summary progress update
+>Defect Label to Check update
+>JIRAS JIRAS JIRAS
+>Eod Comparison
+
+DO TEST SUMMARY UPDATE PROGRESS
+
+NPV
+NPV_BASE
+NDELTA
+GAMMA
+GAMMA_PCT
+
+FXSWAPS
+THB - 11180705
+CZK - 11180726
+JPY - 11180743
+EQUITY - 11180762
+NYK - 11180766
+
+
+CAL-2225 - Needs Approved
+CAL-2043 - Issue not working as expected
+CAL-2870 - Lenny Hogan Structured Flow
+
+
+97204
+
+11184639
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

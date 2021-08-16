@@ -1,0 +1,59 @@
+body{
+   
+    background: #114357;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #F29492, #114357);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #F29492, #114357); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+}
+
+.responsive{
+    max-width: 75%;
+    height: auto;
+}
+
+img{
+    padding: 15px;
+}
+
+.displayBox{
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.scroll-box{
+    overflow-y: auto;
+    height:500px;
+    float:left;
+    padding: 1rem;
+}
+
+
+
+.myButton {
+	box-shadow:inset 0px 1px 0px 0px #54a3f7;
+	background:linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
+	background-color:#007dc1;
+	border-radius:3px;
+	border:1px solid #06324f;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	padding:6px 24px;
+	text-decoration:none;
+    text-shadow:0px 1px 0px #154682;
+    margin-bottom: 1%;
+    height:30px;
+    width:150px;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
+	background-color:#0061a7;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+ 

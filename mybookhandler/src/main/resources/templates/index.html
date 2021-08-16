@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Notary - Learn more about your Books
+        ITS WORKING!!
+    </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../css/myStyle.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ 
+     </head>
+  <body>
+ 
+      <div class= "container">
+          <div class = "row"> 
+              <!--- Main Content Area-->
+              <div class="col-md-8">
+                <img src="../img/logo_transparent.png"   class="responsive">
+                
+                 <div th:if="${message}" style="white-space: pre-line;" th:class="${'alert ' + alertClass}"> 
+                 <h6 style="display: inline-block;" th:text="${message}"></h6> 
+                <button type="button" style="float: right; position: absolute; right:    0; bottom:   0; display:inline; " class="close" data-dismiss="alert" aria-label="Close">
+    						<span aria-hidden="true">&times;</span></button>
+           </div>
+                <div class="card mb-4">
+                    <h2 class="card-header" id="fileName">Book Title 
+                  </h2>  
+                    <div class="card-body">
+                        <div class="displayBox scroll-box" style="white-space: pre-line;" id="fileContent"> 
+                            Select a book on the right
+                        </div> 
+                    </div>
+            
+                    <div class="card-footer text-muted">
+                        Footer !!!
+                       <ul class= "list-unstyled mb-0" style="float: right; display:flex; " >
+                                	
+                                    <li><a href="#" style="float: right;  display:inline; " onclick="editBook()" class="myButton">Edit Book</a></li>  <li style="color: white;"> </li>
+                                    <form th:action="@{/delete}" method="post" id="deleteForm" enctype="multipart/form-data">
+                                    <li><input readonly type="text" name="ourFile" placeholder="  Book Title" style="display:inline; border:0; " align="right" id="deleteBook">
+                                    <button style="float: right;  display:inline; " name="delete" id="deleteButton" type="submit" class="myButton" > Delete </button></li></form>
+                                </ul>
+                    </div>
+                </div>
+              </div>
+              
+           
+           
+            <!-- Side Bar content-->
+              <div class="col-md-4">
+                  <!--Search Widget-->
+                  <br><br>
+                  <div class="card my-4" >
+                      <h5 class ="card-header">Search</h5>
+                      <div class="card-body">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="keyword" placeholder="Search for...">
+                                <span class="input-group-btn"> 
+                                    <button class="btn btn-secondary" onclick="searchWords()" type="button">Search</button>
+                                </span>
+                            </div>
+                      </div>
+                      <div class="card-footer" id="searchstat">
+
+                      </div>
+                  </div>
+                <!--Select a Book widget-->
+                <div class="card my-4">
+                    <h5 class="card-header"> Upload a Book</h5>
+                    <div class = "card-body">
+                        <div class = "row">
+                            <div class = "col-md-12">
+                                <ul class= "list-unstyled mb-0">
+                                	<form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+                                    <li><input id="fileupload"type="file" name="file" />
+                                        <button id="upload-button" type="submit" > Upload Book! </button></li>
+                                      </form>  
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          
+            								
+ 		<div th:each="A: ${MyList}">
+ 		<h4 th:text="${A}"></h4>
+ 		</div>
+ 		
+ 			<ul th:each="A : ${MyList}">
+    <li th:text="${A}"></li>
+</ul>
+            
+                    <!--Select a Book widget-->
+                      <div class="card my-4">
+                          <h5 class="card-header"> Select a Book</h5>
+                          <div class = "card-body">
+                              <div class = "row">
+                                  <div class = "col-md-12">
+                                  
+                                      <ul class= "list-unstyled mb-0" th:each="bookName: ${bookNames}">
+                                   <!--    For each Element (as A) in MYLIST, print out that value --> 
+ 										<li><a href ="#"  th:text="${bookName}"  th:attr="onclick=|loadBook('${bookName}', '${bookName}')|">Empty Text</a></li>
+ 									
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                
+                     <!--Document Stats-->
+                     <div class="card my-4">
+                        <h5 class="card-header">Document Stats</h5>
+                        <div class="card-body">
+                            <ul class="list-unstyled mb-0">
+                                <li id="docLength"></li>
+                                <li id="wordCount"></li>
+                            </ul>
+                        </div>
+                     </div>
+                  </div>
+              </div>
+              
+          </div>
+          
+      </div>
+      <script id="template-ul-items" type="text/template">
+        <li>
+           {{val}}
+        </li>    
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+     <!-- To get locally download these -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+     
+</body>
+  
+</html> 
+<script type="text/javascript">
+function loadBook(filename, displayName) {
+	
+    let currentBook = "";
+    let url = "../books/" + filename;
+
+    //reset our UI
+    document.getElementById("fileName").innerHTML = displayName + "<button id='stopEdit' style='float: right; visibility: hidden; display:inline; ' onclick='stopedit()' class='myButton' >STOP EDITING </button>";
+    document.getElementById("deleteBook").value =  "         " + displayName;
+    document.getElementById("searchstat").innerHTML = "";
+    document.getElementById("keyword").value = "";
+
+    //create a server a request to load our book
+    var xhr = new XMLHttpRequest();
+ /* open(method, url, async)	Specifies the type of request
+    method: the type of request: GET or POST
+    url: the server(file) location
+    async: true(asynchronous) or false(synchronous)
+    send()	Sends the request to the server(used for GET)*/
+    xhr.open("GET", url, true);
+    xhr.send();
+
+    //What happens when we receive a response
+    /* onreadystatechange	Defines a function to be called when the readyState property changes
+       readyState	Holds the status of the XMLHttpRequest.
+        0: request not initialized
+        1: server connection established
+        2: request received
+        3: processing request
+        4: request finished and response is ready
+        status	200: "OK"
+        403: "Forbidden"
+        404: "Page not found"
+        For a complete list go to the Http Messages Reference
+        statusText	Returns the status-text (e.g. "OK" or "Not Found")*/
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            currentBook = xhr.responseText;
+
+            findMostUsedWords(currentBook);
+            document.getElementById("fileContent").innerHTML = currentBook;
+
+            //remove line breaks
+            currentBook = currentBook.replace(/(?:\r\n|\r|\n)/g, '<br>');
+
+            var elmnt = document.getElementById("fileContent");
+            elmnt.scrollTop = 0;
+
+        }
+    };
+}
+
+function findMostUsedWords(book){
+    var a = book.toLowerCase();
+    let wordArray = a.match(/\b\S+\b/g);
+    let ourDictionary = {};
+
+   
+   //for each word in our array let the variable wordvalue = to each instance
+   //ourDictionary object is initialized here
+   //it is an object of arrays, where index 0 = an array of key value pairs where the key is the word, and value is its count
+   for(let word in wordArray){
+       let wordValue = wordArray[word];
+       if(ourDictionary[wordValue>0]){
+           ourDictionary[wordValue] += 1;
+       }else{
+           ourDictionary[wordValue] =1;
+       }
+   }
+  
+
+    var docLength = document.getElementById("docLength");
+    var wordCount = document.getElementById("wordCount");
+    docLength.innerText = "Document Length " + a.length;
+    wordCount.innerText = "Word Count: " + wordArray.length;
+}
+
+
+//This is our Search Function
+function searchWords() {
+
+    //read the keyword
+    var keyword = document.getElementById("keyword").value;
+    var display = document.getElementById("fileContent");
+
+    var newContent = "";
+
+    //find all the currently marked items
+    let spans = document.querySelectorAll('mark');
+
+    for (var i = 0; i < spans.length; i++) {
+        spans[i].outerHTML = spans[i].innerHTML;
+    }
+
+    //whatever you typed into the Search
+    var re = new RegExp(keyword, "gi");
+    var replaceText = "<mark id='markme' style='background-color: #FFFF00'>$&</mark>";
+    var bookContent = display.innerHTML;
+
+    //add the mark to the book content
+    newContent = bookContent.replace(re, replaceText);
+
+    display.innerHTML = newContent;
+    var count = document.querySelectorAll('mark').length;
+    document.getElementById("searchstat").innerHTML = "found " + count + " matches";
+
+    if (count > 0) {
+        var element = document.getElementById("markme");
+        element.scrollIntoView();
+    };
+
+}
+
+function editBook(){
+	var myBook = document.getElementById("deleteBook").value;
+	 document.getElementById('stopEdit').style.visibility = 'visible';
+	if(myBook == ""){
+		document.getElementById("deleteButton").innerHTML= "Delete";
+	console.log("Hello");
+	}else{
+		document.getElementById("fileContent").setAttribute("contenteditable", "true");
+		
+	}
+	
+}
+function stopedit(){
+	document.getElementById("fileContent").setAttribute("contenteditable", "false");
+	//Get the contents of the current book state
+	var bookContents = document.getElementById("fileContent").innerHTML.replace(/\n/g, '<br/>' );
+	//bookContents.replace(/\n/g, '<br/>');
+	//Create a hidden input element to store the contents of the edited book
+	var bookHidden = document.createElement("input");
+	bookHidden.setAttribute("type", "hidden");
+    bookHidden.setAttribute("name", "ourFileHidden");
+    bookHidden.setAttribute("style", "white-space: pre-wrap;");
+    bookHidden.setAttribute("value", bookContents);
+    document.getElementById("deleteButton").innerHTML= "Save";
+	
+	var myDeleteForm = document.getElementById("deleteForm") || null;
+	if(myDeleteForm){
+		myDeleteForm.action = '/saveEdit';
+	}
+	
+    document.getElementById("deleteForm").appendChild(bookHidden);
+    alert("Click Save to confirm your changes!");
+}
+
+
+
+</script>
