@@ -26,20 +26,25 @@ public class MyBookController {
 	
 	@GetMapping("/")
     public String Load(Model model) throws FileNotFoundException {
-		
 		ArrayList<String> listOfFiles = new ArrayList<String>();
-		String myDirectoryPath = "C:\\Users\\cmcke\\Downloads\\mybookhandler\\mybookhandler\\src\\main\\resources\\static\\books\\";
-		File dir = new File(myDirectoryPath);
-		  File[] directoryListing = dir.listFiles();
-		 if (directoryListing != null) {
-		    for (File child : directoryListing) {
-		 	  listOfFiles.add(child.getName().toString());
-			 
-		    }
-		  } else {
-			  throw new FileNotFoundException();
-			 
-		  }
+		try {
+			
+			String myDirectoryPath = "C:\\Users\\cmcke\\git\\repository\\mybookhandler\\mybookhandler\\src\\main\\resources\\static\\books";
+			File dir = new File(myDirectoryPath);
+			  File[] directoryListing = dir.listFiles();
+			 if (directoryListing != null) {
+			    for (File child : directoryListing) {
+			 	  listOfFiles.add(child.getName().toString());
+				 
+			    }
+			  } else {
+				  System.out.println("Cant find any books in the directory path, this is a local application only");
+				 
+			  }
+		}catch(Exception e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+		
 			
 	    model.addAttribute("bookNames", listOfFiles);
 		return "index";
